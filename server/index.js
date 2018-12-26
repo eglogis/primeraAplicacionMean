@@ -7,6 +7,9 @@ const morgan = require('morgan');
 //express nos devuleve un objeto y lo igualamos a otra constante
 const app = express();
 
+//requerimos cors
+const cors = require('cors');
+
 //creamos una constante para traernos la conexion con la base de datos del fichero database
 const { mongoose } = require('./database');
 
@@ -22,6 +25,8 @@ app.use(morgan('dev'));
 
 //ayuda al servidor a entender el codigo en enviado por el navegador en json
 app.use(express.json());
+
+app.use(cors({origin: 'http://localhost:4200'}));
 
 
 //ROUTES: RUTAS DE NUESTRO SERVIDOR
