@@ -24,9 +24,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 
-
-
-
 //ROUTES: RUTAS DE NUESTRO SERVIDOR
 app.use('/api/empleados',require('./routes/empleados.routes')); //la raiz ahora se accede poniendo /api/empleados para poder usar la ruta esta
 

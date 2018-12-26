@@ -64,11 +64,6 @@ controladorEmpleado.BorrarEmpleado = async (req, res) => {
 
         status: 'Empleado eliminado'
     });
-
-
-
-
-
 };
 
 //exportamos el controlador ya que lo vamos a utilizar en otros ficheros 
