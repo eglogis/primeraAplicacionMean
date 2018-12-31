@@ -14,7 +14,12 @@ controladorEmpleado.getEmpleados = async (req, res) => {
 //metodo para crear un empleado
 controladorEmpleado.crearEmpleados = async (req, res) => {
 
-    const empleados = new empleado(req.body); //crea un nuevo empleado con lo que esta recogiendo de json
+    const empleados = new empleado({
+        name: req.body.name,
+        position: req.body.position,
+        office: req.body.office,
+        salary: req.body.salary
+    }); //crea un nuevo empleado con lo que esta recogiendo de json
     await empleados.save(); //los guardamos el empleado creado antes en la base de datos en la base de datos
     res.json({ //la respuesta que nos data
 

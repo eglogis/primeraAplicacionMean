@@ -15,14 +15,36 @@ export class EmpleadosComponent implements OnInit {
   constructor(private empleadoService: EmpleadoService) { }
 
   ngOnInit() {
+    this.getEmpleados();
   }
 
   addEmpleado(form: NgForm){
-    this.empleadoService.postEmpleado(form.value)
+    if(form.value._id){
+
+      this.empleadoService.putEmpleado(form.value)
+        .subscribe(res =>{
+          this.resetForm(form);
+          M.toast({html: 'Se he actualizado correctamente', classes: 'rounded'});
+          this.getEmpleados();
+        });
+    }
+    else{
+      this.empleadoService.postEmpleado(form.value)
       .subscribe(res => {
         this.resetForm(form);
         M.toast({html: 'Se añadio correctamente', classes: 'rounded'});
+        this.getEmpleados();
       });
+    }
+  }
+
+  getEmpleados(){
+
+    this.empleadoService.getEmpleados()
+    .subscribe(res => {
+      this.empleadoService.empleados = res as Empleado[];
+      console.log(res);
+    });
   }
 
   resetForm(form?: NgForm){
@@ -32,4 +54,21 @@ export class EmpleadosComponent implements OnInit {
     }
   }
 
+  editarEmpleado(empleado: Empleado){
+
+    this.empleadoService.seleccionarEmpleado = empleado;
+  }
+
+
+  borrarEmpleado(_idEmpleado: string){
+
+    if(confirm('¿Estas seguro que quieres eliminarlo?')){
+
+      this.empleadoService.deleteEmpleado(_idEmpleado)
+      .subscribe(res => {
+        this.getEmpleados();
+        M.toast({html: 'Se añadio eliminado correctamente', classes: 'rounded'});
+      });
+    } 
+  }
 }

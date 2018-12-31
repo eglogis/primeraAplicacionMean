@@ -32,9 +32,9 @@ export class EmpleadoService {
     return this.http.put(this.URL_API + `/${Empleado._id}`, Empleado);
   }
 
-  deleteEmpleado(Empleado: Empleado){
+  deleteEmpleado(_idEmpleado: string){
 
-    return this.http.delete(this.URL_API + `/${Empleado._id}`);
+    return this.http.delete(this.URL_API + `/${_idEmpleado}`);
   }
 
 }
